@@ -1,22 +1,45 @@
 #include <stdio.h>
 
 // Desafio de Xadrez - MateCheck
-// Nível: Aventureiro
+// Nível: Mestre
+
+int index = 0;
+const int rook = 5, bishop = 5, queen = 8;
+
+void moveRook() {
+  if (index < rook) {
+    printf("Direita\n");
+    index++;
+    moveRook();
+  }
+  index = 0;
+}
+
+void moveQueen() {
+  if (index < queen) {
+    printf("Esquerda\n");
+    index++;
+    moveQueen();
+  }
+  index = 0;
+}
 
 int main() {
-  const int rook = 5, bishop = 5, queen = 8;
-  
   printf("--- Torre ---\n");
-  for(int i = 0; i < rook; i++)
-    printf("Direita\n");
+  moveRook();
 
   printf("\n--- Bispo ---\n");
-  for(int i = 0; i < bishop; i++)
-    printf("Cima, Direita\n");
+  for(int i = 0; i < bishop; i++) {
+    if (i == bishop - 1) {
+      printf("Cima\n");
+    } else if (i % 2 == 0) {
+      printf("Cima, ");
+    } else
+    printf("Direita\n");
+  }
   
   printf("\n--- Rainha ---\n");
-  for(int i = 0; i < queen; i++)
-    printf("Esquerda\n");
+  moveQueen();
   
   printf("\n--- Cavalo ---\n");
   int i = 0;
